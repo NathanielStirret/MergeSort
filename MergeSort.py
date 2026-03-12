@@ -1,0 +1,38 @@
+def merge_sort(arr):
+    # Base case: a list of 0 or 1 
+    if len(arr) <= 1:
+        return arr
+
+    # Divide: split the array into two halves
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+
+    # Conquer: merge the sorted halves
+    return merge(left, right)
+
+
+def merge(left, right):
+    result = []
+    i = j = 0
+
+    # Merge the two sorted lists
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    # Add any remaining elements
+    result.extend(left[i:])
+    result.extend(right[j:])
+
+    return result
+
+
+# Example usage
+arr = list(map(int, input("Enter numbers: ").split()))
+sorted_arr = merge_sort(arr)
+print("Sorted:", sorted_arr)
